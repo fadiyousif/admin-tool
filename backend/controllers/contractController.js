@@ -4,7 +4,7 @@ const ContractEvent = require("../models/contractModel");
 const getContracts = async (_req, res) => {
   try {
     const contracts = await ContractEvent.find();
-    res.json(contracts);
+    res.status(200).json(contracts);
   } catch (err) {
     console.error(err);
     res.sendStatus(404);
@@ -15,7 +15,7 @@ const getContracts = async (_req, res) => {
 // @route POST /api/terminate
 const createContractEvent = async (req, res) => {
   const contractEvent = await ContractEvent.create(req.body);
-  res.json(contractEvent);
+  res.status(200).json(contractEvent);
 };
 
 module.exports = {
