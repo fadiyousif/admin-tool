@@ -6,16 +6,19 @@ const getContracts = async (_req, res) => {
     const contracts = await ContractEvent.find();
     res.status(200).json(contracts);
   } catch (err) {
-    console.error(err);
-    res.sendStatus(404);
+    res.status(404).json({ error: "Could not fetch list of contracts" });
   }
 };
 
 // @route POST /api/create
 // @route POST /api/terminate
 const createContractEvent = async (req, res) => {
-  const contractEvent = await ContractEvent.create(req.body);
-  res.status(200).json(contractEvent);
+  try {
+    const contractEvent = await ContractEvent.create(req.body);
+    res.status(200).json(contractEvent);
+  } catch (err) {
+    res.status(400).json({ err });
+  }
 };
 
 module.exports = {
