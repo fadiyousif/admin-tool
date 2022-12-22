@@ -15,7 +15,7 @@ const getContracts = async (_req, res) => {
 const createContractEvent = async (req, res) => {
   try {
     const contractEvent = await ContractEvent.create(req.body);
-    res.status(200).json(contractEvent);
+    res.status(201).json(contractEvent);
   } catch (err) {
     res.status(400).json({ err });
   }
