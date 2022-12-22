@@ -11,7 +11,7 @@ Figurative insurance system that processes events in the backend and generates a
 
 ## Coded with
 
-- React
+- React & Material UI
 - Node.js
 - Express
 
