@@ -18,28 +18,25 @@ const writeEventToFile = (path, contractEvent) => {
 };
 
 const parseEvents = (events) => {
-  return events
-    .split("\r\n")
-    .map((event) => JSON.parse(event))
-    .reduce(
-      (list, { name, contractId, premium, startDate, terminationDate }) => {
-        if (name === "ContractCreatedEvent") {
-          const contract = {
-            contractId,
-            premium,
-            startDate,
-          };
-          list.unshift(contract);
-        } else {
-          const existingContract = list.find(
-            (event) => event.contractId === contractId
-          );
-          existingContract.terminationDate = terminationDate;
-        }
-        return list;
-      },
-      []
-    );
+  return events.split("\r\n").reduce((list, eventStr) => {
+    const event = JSON.parse(eventStr);
+    const { name, contractId, premium, startDate, terminationDate } = event;
+
+    if (name === "ContractCreatedEvent") {
+      const contract = {
+        contractId,
+        premium,
+        startDate,
+      };
+      list.unshift(contract);
+    } else {
+      const existingContract = list.find(
+        (event) => event.contractId === contractId
+      );
+      existingContract.terminationDate = terminationDate;
+    }
+    return list;
+  }, []);
 };
 
 module.exports = { writeEventToFile, parseEvents };
