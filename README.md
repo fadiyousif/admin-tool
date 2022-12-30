@@ -9,20 +9,21 @@ Figurative insurance system that processes events in the backend and generates a
 - Render contracts on the front-end with pagination
 - Handle requests to create and terminate contracts
 
-## Coded with
+## Routes
 
-- React & Material UI
-- Node.js
-- Express
-
-## Notes
-
-Due to issues with proxy when the GET route is set to `/`, I ended up prepending `/api` to all routes:<br>
 `GET /api` returns a list of all contracts, based on existing events <br>
 `POST /api/create` saves new **ContractCreatedEvent** event <br>
 `POST /api/terminate` saves new **ContractTerminatedEvent** event <br>
 
+## Notes
+
 Due to the large number of contracts, I added client-side pagination to facilitate navigation. No more than 10 contracts will be rendered per page. I also implemented rate limiting on the front-end, so the user is only allowed to create one contract every 2 seconds.
+
+## Coded with
+
+- React & Material UI
+- Node
+- Express
 
 <hr>
 
